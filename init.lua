@@ -48,8 +48,8 @@ require("lazy").setup({
     build = ":TSUpdate",
     config = function()
       require("nvim-treesitter.configs").setup({
-        ensure_installed = { "lua","vim"--,"vimdoc","bash","python",
-        -- "javascript","typescript","json","html","css",
+        ensure_installed = { "lua","vim","vimdoc","bash","python",
+        "javascript","typescript","json","html","css",
         },
         auto_install = true,
         highlight = {
