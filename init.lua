@@ -3,7 +3,7 @@
 vim.g.mapleader = " "           -- makes the spacebar my leaderkey
 vim.o.cursorline = true         -- highlight the current line
 vim.o.termguicolors = true      -- enable 24-bit RGB colors
-
+vim.opt.mouse = "a"             -- enable mouse for all modes
 
 -- tabbing
 vim.cmd("set expandtab")        -- tabs as spaces
@@ -95,7 +95,7 @@ require("lazy").setup({
       name = "catppuccin",
       priority = 1000, -- load before other UI plugins
       opts = {
-        flavour = "mocha", -- latte, frappe, macchiato, mocha
+        flavour = "frappe", -- latte, frappe, macchiato, mocha
         transparent_background = false,
         term_colors = true,
 
@@ -117,6 +117,35 @@ require("lazy").setup({
       end,
 },
 ------------------------------
+      -- new plugins 19/01/2026 
+      { "nvim-lualine/lualine.nvim" },               -- statusline
+      { "kyazdani42/nvim-tree.lua", dependencies = "nvim-tree/nvim-web-devicons" }, -- file explorer
+      { "numToStr/Comment.nvim" },                  -- commenting
+      { "folke/which-key.nvim" },                   -- keybinding hints
+      { "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim" }, -- TODO/FIXME highlights
+        
+-------------------------------
+    {
+      "karb94/neoscroll.nvim",
+      config = function()
+      require('neoscroll').setup({
+        easing_function = "cubic",
+        hide_cursor = true,
+        stop_eof = true,
+        respect_scrolloff = true,
+        cursor_scrolls_alone = true,
+        mappings = {
+            '<C-u>', '<C-d>', '<C-b>', '<C-f>', '<C-y>', '<C-e>',
+            '<ScrollWheelUp>', '<ScrollWheelDown>', '<S-ScrollWheelUp>', '<S-ScrollWheelDown>'
+        },
+        -- optional: set smooth scroll step for mouse
+        scroll_step = 3,
+    })
+    end
+    },
+
+
+
 })
 
 
@@ -127,6 +156,38 @@ vim.keymap.set("n", "<leader>fg", builtin.live_grep,  { desc = "Live grep" })
 vim.keymap.set("n", "<leader>fb", builtin.buffers,    { desc = "Buffers" })
 vim.keymap.set("n", "<leader>fh", builtin.help_tags,  { desc = "Help tags" })
 
+
+-- Lualine setup
+require('lualine').setup({
+  options = { theme = 'catppuccin' }
+})
+
+-- Nvim-tree setup
+require('nvim-tree').setup({
+  view = { width = 30, side = 'left' },
+  git = { enable = true },
+})
+
+-- Comment.nvim setup
+require('Comment').setup({
+    -- optional toggler keymaps
+    toggler = {
+        line = "<C-_>",  -- Ctrl+/ for line comment
+        block = "<C-\\>" -- optional block comment
+    },
+    -- optional extra mappings for visual mode
+    opleader = {
+        line = "<C-_>",
+        block = "<C-\\>"
+    },
+})
+
+
+-- Which-key setup
+require('which-key').setup()
+
+-- TODO comments setup
+require('todo-comments').setup()
 
 
 
