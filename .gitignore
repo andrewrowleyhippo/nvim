@@ -1,0 +1,17 @@
+# lazy.nvim
+lazy-lock.json
+
+# Neovim runtime files
+plugin/
+spell/
+shada/
+swap/
+undo/
+backup/
+view/
+
+# OS junk
+.DS_Store
+
+# my bin
+trash/
